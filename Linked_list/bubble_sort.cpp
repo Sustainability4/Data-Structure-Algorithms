@@ -33,8 +33,7 @@ Node *bubbleSort(Node *head)
             cur->next = a->next;
             a->next = cur;
             prev->next = a;
-            prev = cur;
-            cur = cur->next;
+            prev = cur; 
             count++;
         }
     }
