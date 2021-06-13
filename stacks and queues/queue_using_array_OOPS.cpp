@@ -29,7 +29,16 @@ class QueueUsingArray{
 
     void enqueue(T element){
         if(size == capacity){
-            cout<<"Queue is Full !!"<< endl;
+            int temp = firstIndex;
+            T*newdata = new T[capacity*2];
+            for(int i =0; i <capacity; i++){
+                newdata[i] = data[temp];
+                temp = (temp+1)%capacity;
+            }
+            data = newdata;
+            firstIndex = 0;
+            nextIndex = capacity;
+            capacity = capacity*2;
             return;
         }
         data[nextIndex]= element;
