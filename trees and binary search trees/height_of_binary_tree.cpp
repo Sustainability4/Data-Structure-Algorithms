@@ -17,6 +17,50 @@ class BinaryTreeNode {
 
 using namespace std;
 
+int height(BinaryTreeNode<int> * root){
+    if(root == NULL){
+        return 0;
+    }
+
+    return 1 + max(height(root->left)+height(root->right));
+}
+
+pair<int,int> heightDiameter(BinaryTreeNode<int>*root){
+    if(root == NULL){
+        pair<int,int> p;
+        p.first = 0;
+        p.second = 0;
+
+        return p;
+    }
+
+    pair<int,int> leftAns = heightDiameter(root->left);
+    pair<int,int> rightAns = heightDiameter(root->right);
+
+    int ld = leftAns.second;
+    int lh = leftAns.first;
+
+    int rd = rightAns.second;
+    int rh = rightAns.first;
+
+    pair<int,int> hd;
+    hd.first = 1+max(lh,rh);
+    hd.second = max(max(ld,rd),(lh+rh));
+
+    return hd;
+}
+int diameter(BinaryTreeNode<int> * root){
+    if(root == NULL){
+        return 0;
+    }
+
+    int option1 = height(root->left) + height(root->right);
+    int option2 = diameter(root->left);
+    int option3 = diameter(root->right);
+
+    return max(option1,option2,option3);
+}
+
 int height(BinaryTreeNode<int>* root) {
     // Write our code here
     if(root == NULL){
