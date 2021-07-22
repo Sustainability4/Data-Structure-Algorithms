@@ -21,6 +21,10 @@ int main() {
     }
   // Actually .find() function in the map will actually return an iterator. 
   // You can also give erase function in an iterator.
+    
+  // We can also give starting to ending iterator 
+    
+    //ourmap.erase(it, it+4)
 
     vector<int> v;
     v.push_back(1);
