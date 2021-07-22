@@ -20,6 +20,7 @@ int main() {
         it++;
     }
   // Actually .find() function in the map will actually return an iterator. 
+  // You can also give erase function in an iterator.
 
     vector<int> v;
     v.push_back(1);
