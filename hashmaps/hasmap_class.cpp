@@ -75,6 +75,35 @@ class ourmap{
 
         return hashcode%numbuckets;
     }
+    
+    void rehash(){
+        mapnode<V>**temp = buckets;
+        buckets = new mapnode<V>*[2*numbuckets];
+        for(int i = 0 ; i<2*numbuckets; i++){
+            buckets[i] = NULL;
+        }
+        
+        int oldbucketcount = numbuckets;
+        numbuckets *= 2;
+        count = 0;
+        
+        for(int i =0 ; i<oldbucketcount;i++){
+            mapnode<V>*head = temp[i];
+            while(head != NULL){
+                string key = head->key;
+                V value = head->value;
+                insert(key,head);
+                head = head->next;
+           }
+        }
+        
+        for(int i = 0 ; i<oldbucketcount; i++){
+            mapnode<V>*head = temp[i];
+            delete head;
+        }
+        
+        delete [] temp;
+    }
 
     public:
 
@@ -94,6 +123,11 @@ class ourmap{
         node->next = head;
         buckets[bucketIndex] = node;
         count++;
+        
+        double load_factor = (1+count)/numbuckets;
+        if(load_factor >0.7){
+            rehash();
+        }
 
 
     }
