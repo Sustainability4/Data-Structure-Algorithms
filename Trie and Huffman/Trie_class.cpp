@@ -75,6 +75,28 @@ class Trie {
         // Write your code here
         return search(root,word);
     }
+   
+    void removeWord(TrieNode*root, string word){
+        if(word.size() == 0){
+            root->isTerminal = false;
+            return;
+        }
+
+        TrieNode*child;
+        int index = word[0]-'a';
+        if(root->children[index]!=NUll){
+            child = root->children[index];
+        }
+        else{
+            return;
+        }
+
+        removeWord(child,word.substr(1));
+    }
+
+    void removeWord(string word){
+        removeWord(root,word);
+    }
 };
 
 int main() {
