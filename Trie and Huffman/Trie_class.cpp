@@ -92,6 +92,16 @@ class Trie {
         }
 
         removeWord(child,word.substr(1));
+       // Remove child Node if it is useless
+		   if(child -> isTerminal == false) {
+			   for(int i = 0; i < 26; i++) {
+				   if(child -> children[i] != NULL) {
+					   return;
+				   }
+			   }
+			   delete child;
+			   root -> children[index] = NULL;
+		}
     }
 
     void removeWord(string word){
